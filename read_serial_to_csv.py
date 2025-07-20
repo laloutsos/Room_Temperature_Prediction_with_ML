@@ -15,6 +15,7 @@ def main():
         writer = csv.writer(file)
 
         while True:
+            print("Reading Serial Monitor...")
             line = ser.readline().decode('utf-8').strip()
             if line:
                 print(line)

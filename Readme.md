@@ -1,50 +1,100 @@
-# Room Temperature Logger with Arduino & Python
+# 📡 Temperature & Humidity Logger
 
-This project is an ongoing attempt to explore how accurately we can **predict room temperature and humidity** using **sensor data** and basic 
-**machine learning techniques**. It starts by collecting temperature and humidity 
-data from a **DHT11 sensor** using an **Arduino**, and stores this data in real-time via a **Python serial logger** into a CSV file.
+A simple project to measure, log, and visualize **temperature** and **humidity** data using an Arduino-compatible microcontroller, a **DHT11 sensor**, and Python scripts.
 
-##  Project Goals
+---
 
-* Measure and log **room temperature and humidity** at regular intervals.
-* Store the data with a **timestamp** for future training of predictive models.
-* Build a pipeline that can later be used to train models for **time series forecasting**.
+## 📁 Project Structure
 
-##  Technologies Used
+```bash
+.
+├── simpletemp.ino           # Arduino code to read from DHT11 sensor and print to Serial
+├── read_serial_to_csv.py    # Python script to read serial data and save to CSV
+├── plot.py                  # Python script to visualize data from CSV
+├── sensor_data.csv          # Output file containing timestamped sensor readings
+```
 
-* **Arduino Uno** with **DHT11** sensor
-* **Python 3** for serial communication and CSV logging
-* **CSV** format for easy data import/export
+---
 
-##  How It Works
+## ⚙️ What Each File Does
 
-### Arduino Sketch
+### 1. `simpletemp.ino`
 
-* Reads from a DHT11 sensor every 60 seconds
-* Sends the data via serial in the format:
+This Arduino sketch reads temperature and humidity values from a **DHT11 sensor** every \~8 minutes (500,000 ms), and sends the data over the Serial port in the format:
 
-  ```
-  <seconds_since_start>,<temperature>,<humidity>
-  ```
+```
+<temperature>,<humidity>
+```
 
-### Python Logger
+#### Requirements
 
-* Listens to the Arduino serial output
-* Gets current system time in **HHMM** format
-* Saves each reading as:
+* A DHT11 sensor connected to **digital pin 4**
+* DHT non-blocking library (DHT\_nonblocking)
 
-  ```
-  <time(HHMM)>,<temperature>,<humidity>
-  ```
-* Logs to `sensor_data.csv`
+### 2. `read_serial_to_csv.py`
 
-##  Live Demo / Progress
+This Python script listens to the serial port (e.g. `COM3`) and appends the incoming sensor data into a CSV file `sensor_data.csv`. Each row is structured as:
 
-This project is **under active development**. I'll be updating this repository frequently as I:
+```
+<HHMM>,<humidity>,<temperature>
+```
 
-* Improve data formatting
-* Add real-time visualizations
-* Train ML models to predict future room temperature values
+For example, a reading at 2:45 PM might be:
+
+```
+1445, 58.2, 22.5
+```
+
+#### Requirements
+
+* Python 3.x
+* `pyserial` module
+
+```bash
+pip install pyserial
+```
+
+### 3. `plot.py`
+
+This script reads `sensor_data.csv` and creates two line plots:
+
+* **Temperature over Time** (top plot)
+* **Humidity over Time** (bottom plot)
+
+The x-axis shows the time in `HH:MM` format, and the y-axis shows the corresponding values.
+
+
+#### Requirements
+
+* `matplotlib` module
+
+```bash
+pip install matplotlib
+```
+
+---
+
+## 🚀 How to Run the Project
+
+1. **Upload `simpletemp.ino`** to your Arduino-compatible board.
+2. **Run `read_serial_to_csv.py`** on your PC to start logging data.
+3. Let it run and collect data over time.
+4. When ready, run **`plot.py`** to generate and view the charts.
+
+---
+
+## 📝 Notes
+
+* Make sure the correct `SERIAL_PORT` is configured in `read_serial_to_csv.py`.
+* The script logs data every 8+ minutes, as configured in the Arduino code.
+* If you want more frequent readings, reduce the delay in `simpletemp.ino`.
+
+---
+
+## 📊 Example Output
+
+The resulting graphs will help you visualize temperature and humidity trends throughout the day.
+![Temperature and Humidity Plot](plots.png)
 
 
 ---

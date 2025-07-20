@@ -14,12 +14,11 @@ void setup() {
 void loop() {
   static unsigned long lastMeasurement = 0;
 
-  if (millis() - lastMeasurement > 60000) { 
+  if (millis() - lastMeasurement > 500000) { 
     if (dht_sensor.measure(&temperature, &humidity)) {
       unsigned long time_sec = millis() / 1000;  
 
-      Serial.print(time_sec);
-      Serial.print(",");
+
       Serial.print(temperature);
       Serial.print(",");
       Serial.println(humidity);
