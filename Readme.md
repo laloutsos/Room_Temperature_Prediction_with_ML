@@ -42,7 +42,7 @@ This Python script listens to the serial port (e.g. `COM3`) and appends the inco
 For example, a reading at 2:45 PM might be:
 
 ```
-1445, 58.2, 22.5
+1445, 22.5, 58.2
 ```
 
 #### Requirements
