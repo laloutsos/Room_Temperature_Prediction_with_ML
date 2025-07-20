@@ -25,10 +25,10 @@ def main():
                     now = datetime.now()
                     hour_min = now.hour * 100 + now.minute 
 
-                    humidity = data[0]
-                    temperature = data[1]
+                    temperature = data[0]
+                    humidity = data[1]
 
-                    writer.writerow([hour_min, humidity, temperature])
+                    writer.writerow([hour_min, temperature, humidity])
                     file.flush()
 
 if __name__ == '__main__':
