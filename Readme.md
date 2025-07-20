@@ -36,7 +36,7 @@ This Arduino sketch reads temperature and humidity values from a **DHT11 sensor*
 This Python script listens to the serial port (e.g. `COM3`) and appends the incoming sensor data into a CSV file `sensor_data.csv`. Each row is structured as:
 
 ```
-<HHMM>,<humidity>,<temperature>
+<HHMM>,<temperature>,<humidity>
 ```
 
 For example, a reading at 2:45 PM might be:
