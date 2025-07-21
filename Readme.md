@@ -13,10 +13,15 @@ A simple project to measure, log, and visualize **temperature** and **humidity**
 ├── plot.py                  # Python script to visualize data from CSV
 ├── sensor_data.csv          # Output file containing timestamped sensor readings
 ```
+##  Circuit Diagram
+
+The image below shows how to wire the **DHT11 sensor** to your microcontroller:
+
+![DHT11 Circuit Diagram](circuit_image.png)
 
 ---
 
-## ⚙️ What Each File Does
+## ️ What Each File Does
 
 ### 1. `simpletemp.ino`
 
@@ -29,7 +34,8 @@ This Arduino sketch reads temperature and humidity values from a **DHT11 sensor*
 #### Requirements
 
 * A DHT11 sensor connected to **digital pin 4**
-* DHT non-blocking library (DHT\_nonblocking)
+* DHT non-blocking library (DHT\_nonblocking) 
+
 
 ### 2. `read_serial_to_csv.py`
 
@@ -74,7 +80,7 @@ pip install matplotlib
 
 ---
 
-## 🚀 How to Run the Project
+## How to Run the Project
 
 1. **Upload `simpletemp.ino`** to your Arduino-compatible board.
 2. **Run `read_serial_to_csv.py`** on your PC to start logging data.
@@ -83,7 +89,7 @@ pip install matplotlib
 
 ---
 
-## 📝 Notes
+## Notes
 
 * Make sure the correct `SERIAL_PORT` is configured in `read_serial_to_csv.py`.
 * The script logs data every 8+ minutes, as configured in the Arduino code.
@@ -91,7 +97,7 @@ pip install matplotlib
 
 ---
 
-## 📊 Example Output
+## Example Output
 
 The resulting graphs will help you visualize temperature and humidity trends throughout the day.
 ![Temperature and Humidity Plot](plots.png)
